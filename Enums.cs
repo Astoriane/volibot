@@ -18,13 +18,13 @@ namespace RitoBot
     class Enums
     {
         public static object[] champions = new object[] { 
-            "AATROX", "AHRI", "AKALI", "ALISTAR", "AMUMU", "ANIVIA", "ANNIE", "ASHE", "AZIR", "BLITZCRANK", "BRAND", "BRAUM", "CAITLYN", "CASSIOPEIA", "CHOGATH", "CORKI",
+            "AATROX", "AHRI", "AKALI", "ALISTAR", "AMUMU", "ANIVIA", "ANNIE", "ASHE", "AURELIONSOL", "AZIR", "BLITZCRANK", "BRAND", "BRAUM", "CAITLYN", "CASSIOPEIA", "CHOGATH", "CORKI",
 "DARIUS", "DIANA", "MUNDO", "DRAVEN", "ELISE", "EVELYNN", "EZREAL", "FIDDLESTICKS", "FIORA", "FIZZ", "GALIO", "GANGPLANK", "GAREN", "GNAR", "GRAGAS", "GRAVES",
 "HECARIM", "HEIMERDIGER", "IRELIA", "JANNA", "JARVAN", "JAX", "JAYCE", "JINX", "KALISTA", "KARMA", "KARTHUS", "KASSADIN", "KATARINA", "KAYLE", "KENNEN",
-"KHAZIX", "KOGMAW", "LEBLANC", "LEESIN", "LEONA", "LISSANDRA", "LUCIAN", "LULU", "LUX", "MALPHITE", "MALZAHAR", "MAOKAI", "MASTERYI", "MISSFORTUNE",
+"KHAZIX", "KINDRED", "KLED", "KOGMAW", "LEBLANC", "LEESIN", "LEONA", "LISSANDRA", "LUCIAN", "LULU", "LUX", "MALPHITE", "MALZAHAR", "MAOKAI", "MASTERYI", "MISSFORTUNE",
 "MORDEKAISER", "MORGANA", "NAMI", "NASUS", "NAUTILUS", "NIDALEE", "NOCTURNE", "NUNU", "OLAF", "ORIANNA", "PANTHEON", "POPPY", "QUINN", "REKSAI", "RAMMUS",
 "RENEKTON", "RENGAR", "RIVEN", "RUMBLE", "RYZE", "SEJUANI", "SHACO", "SHEN", "SHYVANA", "SINGED", "SION", "SIVIR", "SKARNER", "SONA", "SORAKA", "SWAIN",
-"SYNDRA", "TALON", "TARIC", "TEEMO", "THRESH", "TRISTANA", "TRUNDLE", "TRYNDAMERE", "TWISTEDFATE", "TWITCH", "UDYR", "URGOT", "VARUS", "VAYNE", "VEIGAR",
+"SYNDRA", "TAHMKENCH", "TALIYAH", "TALON", "TARIC", "TEEMO", "THRESH", "TRISTANA", "TRUNDLE", "TRYNDAMERE", "TWISTEDFATE", "TWITCH", "UDYR", "URGOT", "VARUS", "VAYNE", "VEIGAR",
 "VELKOZ", "VI", "VIKTOR", "VLADIMIR", "VOLIBEAR", "WARWICK", "WUKONG", "XERATH", "XINZHAO", "YASUO", "YORICK", "ZAC", "ZED", "ZIGGS", "ZILEAN", "ZYRA"
         };
         public static object[] queues = new object[] {
@@ -56,6 +56,8 @@ namespace RitoBot
                     return 1;
                 case "ASHE":
                     return 22;
+                case "AURELIONSOL":
+                    return 136;
                 case "AZIR":
                     return 268;
                 case "BLITZCRANK":
@@ -136,6 +138,10 @@ namespace RitoBot
                     return 85;
                 case "KHAZIX":
                     return 121;
+                case "KINDRED":
+                    return 203;
+                case "KLED":
+                    return 240;
                 case "KOGMAW":
                     return 96;
                 case "LEBLANC":
@@ -226,6 +232,10 @@ namespace RitoBot
                     return 50;
                 case "SYNDRA":
                     return 134;
+                case "TAHMKENCH":
+                    return 223;
+                case "TALIYAH":
+                    return 163;
                 case "TALON":
                     return 91;
                 case "TARIC":

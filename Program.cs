@@ -45,25 +45,21 @@ namespace RitoBot
         public static string spell2 = "ignite";
         public static string cversion = "6.18.16_09_01_19_25";
         public static bool AutoUpdate = false;
-        public static bool LoadGUI = true;
-        public static frm_MainWindow MainWindow = new frm_MainWindow();
 
         static void Main(string[] args)
         {
             InitChecks();
-            loadVersion();
-            Console.Title = "Volibot";
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Title = "Saebot";
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.SetWindowSize(Console.WindowWidth + 5, Console.WindowHeight);
-            Console.WriteLine("================================================");
-            Console.WriteLine("----------Saebot v0.1a for League " + cversion.Substring(0, 4) + "----------");
-            Console.WriteLine("================================================");
+            Console.WriteLine("Saebot v0.1a");
+            loadVersion();
             Console.WriteLine();
-            Console.WriteLine(getTimestamp() + "Loading config/settings.ini");
+            log("config", "Loading config/settings.ini");
             loadConfiguration();
             if (replaceConfig)
             {
-                Console.WriteLine(getTimestamp() + "Replacing Config");
+                log("config", "Replacing Config");
                 gamecfg();
             }
             while (!File.Exists(Path2 + "lol.launcher.exe"))
@@ -76,13 +72,11 @@ namespace RitoBot
                 loadConfiguration();
             }
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine(getTimestamp() + "Loading config/accounts.txt");
+            log("config", "Loading config/accounts.txt");
         ReloadAccounts:
             loadAccounts();
             int curRunning = 0;
-            if (LoadGUI) MainWindow.ShowDialog();
-            if (!LoadGUI)
-            {
+
                 foreach (string acc in accounts)
                 {
                     try
@@ -108,25 +102,39 @@ namespace RitoBot
                             QueueTypes queuetype = QueueTypes.ARAM;
                             Saebot ritoBot = new Saebot(result[0], result[1], Region, Path2, curRunning, queuetype);
                         }
-                        Console.Title = "Saebot | Region: "+Region+" | Currently connected: " + connectedAccs;
+                        Console.Title = "Saebot "+cversion+" | Region: "+Region+" | Currently connected: " + connectedAccs;
                         if (curRunning == maxBots)
                             break;
                     }
                     catch (Exception)
                     {
-                        Console.WriteLine("CountAccError: You may have an issue in your accounts.txt");
+                        log("ERROR", "CountAccError: You may have an issue in your accounts.txt");
                         Application.Exit();
                     }
                 }
                 Console.ReadKey();
-            }
+            
         }
+
+        private static void log(string data, string status)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write(getTimestamp());
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("[" + data + "] ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(status);
+
+        }
+
         public static void loadVersion()
         {
-
+            log("config", "Loading league version.");
             var versiontxt = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + @"config\\version.txt");
             cversion = versiontxt.ReadLine();
+            log("config", "League version " + cversion);
         }
+
         public static void lognNewAccount()
         {
             accounts2 = accounts;
@@ -152,7 +160,7 @@ namespace RitoBot
                     QueueTypes queuetype = QueueTypes.ARAM;
                     Saebot ritoBot = new Saebot(result[0], result[1], Region, Path2, curRunning, queuetype);
                 }
-                Console.Title = "Saebot | Region: " + Region + " | Currently connected: " + connectedAccs;
+                Console.Title = "Saebot " + cversion + " | Region: " + Region + " | Currently connected: " + connectedAccs;
                 if (curRunning == maxBots)
                     break;
             }
@@ -164,7 +172,6 @@ namespace RitoBot
                 IniFile iniFile = new IniFile(AppDomain.CurrentDomain.BaseDirectory + "config\\settings.ini");
                 //General
                 Path2 = iniFile.IniReadValue("General", "LauncherPath");
-                LoadGUI = Convert.ToBoolean(iniFile.IniReadValue("General", "LoadGUI"));
                 maxBots = Convert.ToInt32(iniFile.IniReadValue("General", "MaxBots"));
                 maxLevel = Convert.ToInt32(iniFile.IniReadValue("General", "MaxLevel"));
                 championId = iniFile.IniReadValue("General", "ChampionPick").ToUpper();
@@ -196,14 +203,17 @@ namespace RitoBot
             }
             tr.Close();
         }
+
         public static String getTimestamp()
         {
             return "[" + DateTime.Now + "] ";
         }
-        public static void getColor(ConsoleColor color)
+
+        public static void setColor(ConsoleColor color)
         {
             Console.ForegroundColor = color;
         }
+
         public static void gamecfg()
         {
             try
@@ -228,6 +238,7 @@ namespace RitoBot
                 Console.WriteLine("game.cfg Error: If using VMWare Shared Folder, make sure it is not set to Read-Only.\nException:" + exception2.Message);
             }
         }
+
         private static string RandomString(int size)
         {
             StringBuilder builder = new StringBuilder();
@@ -241,6 +252,7 @@ namespace RitoBot
 
             return builder.ToString();
         }
+
         private static void InitChecks()
         {
             var theFolder = AppDomain.CurrentDomain.BaseDirectory + @"config\\";

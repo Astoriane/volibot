@@ -433,25 +433,20 @@ namespace RitoBot
         [DllImport("user32.dll", SetLastError = true)]
         internal static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
 
+        private void log(string account, string status)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write(Program.getTimestamp());
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("[" + account + "] ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(status);
+            
+        }
+
         private void updateStatus(string status, string accname)
         {
-            if (Program.LoadGUI) Program.MainWindow.Print(string.Concat(new object[4]
-              {
-                (object) "[",
-                (object) accname,
-                (object) "]: ",
-                (object) status
-              }));
-            Console.WriteLine(string.Concat(new object[7]
-              {
-                (object) "[",
-                (object) DateTime.Now,
-                (object) "] ",
-                (object) "[",
-                (object) accname,
-                (object) "]: ",
-                (object) status
-              }));
+            log(accname, status);
         }
 
         private async void RegisterNotifications()
@@ -580,14 +575,14 @@ namespace RitoBot
         private void connection_OnDisconnect(object sender, EventArgs e)
         {
             Program.connectedAccs -= 1;
-            Console.Title = "Saebot | Region: " + Program.Region + " | Disconnected.";
+            Console.Title = "Saebot "+Program.cversion+" | Region: " + Program.Region + " | Disconnected";
             this.updateStatus("Disconnected", Accountname);
         }
 
         private void connection_OnConnect(object sender, EventArgs e)
         {
             Program.connectedAccs += 1;
-            Console.Title = "Saebot | Region: " + Program.Region + " | Currently connected: " + Program.connectedAccs;
+            Console.Title = "Saebot " + Program.cversion + " | Region: " + Program.Region + " | Currently connected: " + Program.connectedAccs;
         }
 
         public void levelUp()

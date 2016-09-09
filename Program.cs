@@ -59,7 +59,7 @@ namespace RitoBot
             Console.WriteLine("----------Saebot v0.1a for League " + cversion.Substring(0, 4) + "----------");
             Console.WriteLine("================================================");
             Console.WriteLine();
-            Console.WriteLine(getTimestamp() + "Loading config\\settings.ini");
+            Console.WriteLine(getTimestamp() + "Loading config/settings.ini");
             loadConfiguration();
             if (replaceConfig)
             {
@@ -75,8 +75,8 @@ namespace RitoBot
                 System.Threading.Thread.Sleep(5000);
                 loadConfiguration();
             }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(getTimestamp() + "Loading config\\accounts.txt");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(getTimestamp() + "Loading config/accounts.txt");
         ReloadAccounts:
             loadAccounts();
             int curRunning = 0;
@@ -101,12 +101,12 @@ namespace RitoBot
                         if (result[2] != null)
                         {
                             QueueTypes queuetype = (QueueTypes)System.Enum.Parse(typeof(QueueTypes), result[2]);
-                            RiotBot ritoBot = new RiotBot(result[0], result[1], Region, Path2, curRunning, queuetype);
+                            Saebot ritoBot = new Saebot(result[0], result[1], Region, Path2, curRunning, queuetype);
                         }
                         else
                         {
                             QueueTypes queuetype = QueueTypes.ARAM;
-                            RiotBot ritoBot = new RiotBot(result[0], result[1], Region, Path2, curRunning, queuetype);
+                            Saebot ritoBot = new Saebot(result[0], result[1], Region, Path2, curRunning, queuetype);
                         }
                         Console.Title = "Saebot | Region: "+Region+" | Currently connected: " + connectedAccs;
                         if (curRunning == maxBots)
@@ -145,14 +145,14 @@ namespace RitoBot
                 if (result[2] != null)
                 {
                     QueueTypes queuetype = (QueueTypes)System.Enum.Parse(typeof(QueueTypes), result[2]);
-                    RiotBot ritoBot = new RiotBot(result[0], result[1], Region, Path2, curRunning, queuetype);
+                    Saebot ritoBot = new Saebot(result[0], result[1], Region, Path2, curRunning, queuetype);
                 }
                 else
                 {
                     QueueTypes queuetype = QueueTypes.ARAM;
-                    RiotBot ritoBot = new RiotBot(result[0], result[1], Region, Path2, curRunning, queuetype);
+                    Saebot ritoBot = new Saebot(result[0], result[1], Region, Path2, curRunning, queuetype);
                 }
-                Console.Title = "RitoBot Console | Currently connected: " + connectedAccs;
+                Console.Title = "Saebot | Region: " + Region + " | Currently connected: " + connectedAccs;
                 if (curRunning == maxBots)
                     break;
             }
